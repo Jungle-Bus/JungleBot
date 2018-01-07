@@ -52,6 +52,8 @@ Here is a full example of the valid metadata for a conversation
 
 ```yml
 name: starback_order
+apiVersion: 1.0
+revision: 2
 languages:
   - en
   - fr
@@ -84,6 +86,26 @@ Can use all alphanumeric characters and **-_**
 Example:  
 ```yml
 name: starback_order
+```
+
+### apiVersion
+------
+The version of the JungleBob specification. Currently, version is `1.0`
+
+
+Example:  
+```yml
+apiVersion: 1.0
+```
+
+
+### revision
+------
+An integer value matching the current revision for the content of the conversation
+
+Example:  
+```yml
+revision: 4
 ```
 
 ### language

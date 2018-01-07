@@ -1,5 +1,7 @@
 {
   "name": "starback_order",
+  "apiVersion": "1.0",
+  "revision": 2,
   "languages": [
     "en",
     "fr"

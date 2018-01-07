@@ -20,15 +20,15 @@ Right now, we decided to find a smart balance between cold templated sentences a
 
 This is what **JungleBob** is about.
 
-## What it is
+# What it is
 **JungleBob** (inspired by *Le Petit Robert*, *Little Robert* which is a famous french Dictionary) is a specification allowing users to declare rich interactions.  
 The singularity of JungleBob is that it allows to use **contextual** information and add **diversity** to make more natural conversations with bots.
 
-## Format
+# Format
 JungleBob is specified under the descriptive format YAML. It can also be specified as JSON as both formats are compatible.
 In this document, we will focus on the YAML specification.
 
-## Conversation and statements
+# Conversation and statements
 A conversation is a sequence of interactions between two or more parties.  
 When we develop a conversation bot, we need to focus on two things :
  * What we are going to say (our **statements**)
@@ -42,7 +42,8 @@ JungleBob will be used to declare what will be told to the user in the **starter
 
 Therefore, JungleBob will regroup a set of **conversations** which all contain a set of **statements**.
 
-### Conversation
+## Conversation
+------
 
 Here is a full example of the valid metadata for a conversation
 
@@ -72,7 +73,8 @@ statements:
 Details for each field can be found below
 
 
-#### name
+### name
+------
 One-word key to name your conversation. Must be unique.  
 Can use all alphanumeric characters and **-_**
 
@@ -81,7 +83,8 @@ Example:
 name: starback_order
 ```
 
-#### language
+### language
+------
 The list of available languages for the current conversation specified under the format RFC 3066.  
 This list is ordered by descending priority. First language is considered as the default entry.
 
@@ -97,7 +100,8 @@ languages:
 ```
 In this example, english is the default language (being the first entry)
 
-#### purpose
+### purpose
+------
 A few words on what the conversation will be about.
 
 **Important:** this field must be translated in all the available languages.
@@ -113,7 +117,8 @@ purpose:
   pt_BR: ...
 ```
 
-#### tags
+### tags
+------
 A list of keywords which can be used to search for your conversation in an eventual search engine.
 
 **Important:** this field must be translated in all the available languages. You can have a different number of entries for each language.
@@ -135,11 +140,12 @@ tags:
   ...
 ```
 
-#### statements
+### statements
+------
 The exhaustive set of available statements for the conversation. See the Statement section for more details on the format.
 
-### Statement
-
+## Statement
+------
 A statement is exactly what it means: a message you are passing to someone else in a conversation.
 
 Exactly like in reality, your message can be passed so many different ways. To salute someone, we could say either "Hi", or "Hello", or "Good morning".
@@ -155,14 +161,13 @@ Here is a valid full example of a statement:
       - fr: "Bonjour {name}, j'espère que tout va bien aujourd'hui."
         en: "Hello {name}, I hope you are feeling great today."
       - fr: "Tiens, je pensais justement à toi!"
-      - en: "Ohh, I was just thinking about you!"
+        en: "Ohh, I was just thinking about you!"
     contextual:
       - fr: "Salut {name}, ça va ce matin?"
         en: "Hey {name}, how is it going this morning?"
         context:
           anyOf:
             - morning
-      - fr: "Hey {name}, "
       - fr: "Quel beau temps {name}, l'occasion parfaite d'aller se balader"
         en: "What a nice weather {name}, perfect to go for a ride"
         context:
@@ -174,7 +179,8 @@ Here is a valid full example of a statement:
 Details for each field can be found below
 
 
-#### name
+### name
+------
 One-word key to identify your statement. Must be unique.  
 Can use all alphanumeric characters and **-_**
 
@@ -183,7 +189,8 @@ Example:
 name: starter
 ```
 
-#### generic
+### generic
+------
 Generic entries are a list of variations without contextual data.
 This means each generic can be used anytime under any circumstances in the conversation.
 
@@ -197,14 +204,15 @@ generic:
   - fr: "Bonjour {name}, j'espère que tout va bien aujourd'hui."
     en: "Hello {name}, I hope you are feeling great today."
   - fr: "Bonjour très cher."
-  - en: "Hello dear."
+    en: "Hello dear."
   - fr: "Tiens, je pensais justement à toi!"
-  - en: "Ohh, I was just thinking about you!"
+    en: "Ohh, I was just thinking about you!"
 ```
 
 **Important:** this field must be translated in all the available languages.
 
-#### contextual
+### contextual
+------
 This is where the fun begins. You and I always add context to the way we communicate. Whether it is late at night, sunny, whether we are tired or happy, whether my recipient is a man or a woman, etc...
 
 We felt like JungleBob should reflect this contextual information. The principle is quite trivial. All **variations** declared in the contextual area of a statement will have to contain at least one contextual tag. Tags will be determined by the software that implements the specification, and are therefore free to implement any tag they want.

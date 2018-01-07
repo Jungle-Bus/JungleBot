@@ -1,6 +1,6 @@
 # Jungle Bot
 
-Facebook Messenger chatbot for contributing to OpenStreetMap public transport data.
+Chatbot for contributing to OpenStreetMap public transport data (Messenger-only for the while).
 
 ## Purpose
 
@@ -14,7 +14,7 @@ TODO
 
 ## Develop/run your own instance
 
-TODO
+See [develop](DEVELOP.md) documentation for running or starting contributing.
 
 
 ## License

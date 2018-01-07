@@ -1,0 +1,96 @@
+name: contribute_bus
+apiVersion: 1.0
+revision: 1
+languages:
+  - en
+  - fr
+purpose:
+  en: A conversation to guide a contributor through adding valuable information to an existing Bus Stop.
+  fr: Une conversation pour guider un contributer dans l'ajout d'informations utiles à un Arrêt de bus existant.
+tags:
+  en:
+    - bus
+    - bus stop
+    - transportation
+    - transit
+    - line
+  fr:
+    - bus
+    - arrêt de bus
+    - transport
+    - réseau
+    - ligne
+statements:
+  bus_nearby:
+    generic:
+      - fr: "Il y a un arrêt de bus pas loin, est-ce que tu le vois?"
+        en: "There is a bus stop nearby, can you see it?"
+    contextual:
+      - fr: "Il y a un arrêt de bus pas loin, tu arrives à le voir malgré l'obscurité?"
+        en: "There is a bus stop nearby. I know it is dark but can you see it?"
+        context:
+          anyOf:
+            - evening
+            - night
+  yes:
+    generic:
+      - fr: "Oui"
+        en: "Yes"
+      - fr: "Absolument"
+        en: "Absolutely"
+      - fr: "Carrément"
+        en: "For sure"
+  no:
+    generic:
+      - fr: "Non"
+        en: "No"
+      - fr: "Mmmh... Non"
+        en: "Mmmh... No"
+      - fr: "Pas vraiment"
+        en: "Not really"
+      - fr: "Nope"
+        en: "Nope"
+  name_the_bus_stop:
+    generic:
+      - fr: "Super! Tu pourrais me dire comment il s'appelle?"
+        en: "Awesome! Would you be able to tell me its name?"
+      - fr: "Génial! Tu connais son nom?"
+        en: "Cool! Do you know its name?"
+      - fr: "C'est top. Bon maintenant, il faut trouver son nom, tu le connais?"
+        en: "It's great. Now, let's find its name. Do you know its name?"
+  send_photo:
+    generic:
+      - fr: "Merci beaucoup! Tu m'enverrais sa photo?"
+        en: "Thank you so much! Would you send me its picture?"
+    contextual:
+      - fr: "Trop bien! Tu me ferais un petit selfie avec lui (mais juste lui hein)?"
+        en: "Awesome! Would you take a selfie with it? (well just with it actually)?"
+        context:
+          allOf:
+            - active
+            - very-active
+      - fr: "Trop bien! Une petite photo comme d'hab?"
+        en: "Awesome! A little picture as usual?"
+        context:
+          allOf:
+            - active
+            - very-active
+  thanks:
+    generic:
+      - fr: "Merci pour tout! C'est génial"
+        en: "Thanks for everything! It helps a lot"
+    contextual:
+      - fr: "Tu es le meilleur."
+        en: "Awesome! You're the best."
+        context:
+          allOf:
+            - active
+            - very-active
+            - male
+      - fr: "Tu es la meilleure."
+        en: "Awesome! You're the best."
+        context:
+          allOf:
+            - active
+            - very-active
+            - female

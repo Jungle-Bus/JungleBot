@@ -1,5 +1,9 @@
 # JungleBob, the JungleBot Dictionary
 
+Current version: `1.0`
+
+Full samples available in the [samples directory](samples/)
+
 As humans, we all communicate using words. Too bad right? Binary would have been so much simpler.
 When writing code that is supposed to handle interactions, we need to consider pretty much everything like writing a script for a role-playing game.
 
@@ -43,7 +47,6 @@ JungleBob will be used to declare what will be told to the user in the **starter
 Therefore, JungleBob will regroup a set of **conversations** which all contain a set of **statements**.
 
 ## Conversation
-------
 
 Here is a full example of the valid metadata for a conversation
 
@@ -145,7 +148,6 @@ tags:
 The exhaustive set of available statements for the conversation. See the Statement section for more details on the format.
 
 ## Statement
-------
 A statement is exactly what it means: a message you are passing to someone else in a conversation.
 
 Exactly like in reality, your message can be passed so many different ways. To salute someone, we could say either "Hi", or "Hello", or "Good morning".
@@ -154,9 +156,9 @@ To have richer interactions, we thought it would be important to provide the abi
 
 Further more, it makes no sense for anyone to say **Good Morning** at 7 PM. Some variations are **contextual**, and therefore need to be explicitly associated with contextual elements.
 
-Here is a valid full example of a statement:  
+Here is a valid full example of a statement identified by the key **starter**:  
 ```yml
-    name: starter
+  starter:
     generic:
       - fr: "Bonjour {name}, j'espère que tout va bien aujourd'hui."
         en: "Hello {name}, I hope you are feeling great today."
@@ -179,14 +181,17 @@ Here is a valid full example of a statement:
 Details for each field can be found below
 
 
-### name
+### key
 ------
 One-word key to identify your statement. Must be unique.  
 Can use all alphanumeric characters and **-_**
+This statement is an object key inside the parent statements object.
 
 Example:  
 ```yml
-name: starter
+statements:
+  starter:
+    #Place statement content here
 ```
 
 ### generic

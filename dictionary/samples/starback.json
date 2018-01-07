@@ -1,0 +1,125 @@
+{
+  "name": "starback_order",
+  "languages": [
+    "en",
+    "fr"
+  ],
+  "purpose": {
+    "en": "Get all necessary information to prepare the perfect coffee for our contributor.",
+    "fr": "Demande toutes les informations nécessaires pour préparer le café idéal pour nos contributeurs."
+  },
+  "tags": {
+    "en": [
+      "coffee",
+      "coffee shop",
+      "starback",
+      "caffeine"
+    ],
+    "fr": [
+      "café",
+      "starback",
+      "cafféine",
+      "salon de thé"
+    ]
+  },
+  "statements": {
+    "starter": {
+      "generic": [
+        {
+          "fr": "Bonjour, j'espère que tout va bien aujourd'hui. Prêt à commander?",
+          "en": "Hello, I hope you are feeling great today. Ready to order?"
+        },
+        {
+          "fr": "Bonjour, bienvenue à Starback, je peux prendre votre commande?",
+          "en": "Hello, welcome to Starback! Can I take your order?"
+        }
+      ],
+      "contextual": [
+        {
+          "fr": "Bonjour, fraiche matinée n'est-ce pas? Prêt pour prendre un bon café?",
+          "en": "Good morning. It is freezing outside! Ready for a nice warm coffee?",
+          "context": {
+            "allOf": [
+              "morning",
+              "cold"
+            ]
+          }
+        },
+        {
+          "fr": "Bonsoir Madame, que puis-je vous servir?",
+          "en": "Good evening Madam, what can I help you with?",
+          "context": {
+            "allOf": [
+              "female"
+            ],
+            "anyOf": [
+              "evening",
+              "night"
+            ]
+          }
+        }
+      ]
+    },
+    "say_goodbye_cheer_up": {
+      "generic": [
+        {
+          "fr": "Très bien, à plus tard.",
+          "en": "Alright, see you later."
+        },
+        {
+          "fr": "Pas de problèmes, à bientôt.",
+          "en": "No worries, enjoy."
+        },
+        {
+          "fr": "Ok, je vous laisse tranquille.",
+          "en": "Alright, I will leave you to it."
+        }
+      ],
+      "contextual": [
+        {
+          "fr": "Je comprends, avec un temps comme ça... A bientôt.",
+          "en": "I understand, with such a beautiful weather... See you soon.",
+          "context": {
+            "notIn": [
+              "cloudy",
+              "rainy",
+              "night"
+            ]
+          }
+        }
+      ]
+    },
+    "ask_coffee_sugar": {
+      "generic": [
+        {
+          "fr": "Combien de sucres avec votre café?",
+          "en": "How much sugar in your coffee?"
+        },
+        {
+          "fr": "Vous prendrez combien de sucres?",
+          "en": "How much sugar would you like?"
+        }
+      ]
+    },
+    "ask_coffee_options": {
+      "generic": [
+        {
+          "fr": "Autre chose avec ceci?",
+          "en": "Anything else?"
+        },
+        {
+          "fr": "D'autres envies?",
+          "en": "Want something else?"
+        }
+      ]
+    },
+    "order_complete": {
+      "generic": [
+        {
+          "fr": "Parfait, je vous fais passer tout ça. Merci!",
+          "en": "Perfect, I will make it right away. Thanks!"
+        }
+      ]
+    }
+  }
+}

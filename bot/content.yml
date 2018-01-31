@@ -1,18 +1,52 @@
-welcome: # this is the #welcome bloc referenced in index.js
-  - typing: true
-    text: # Picks one randomly
-      - Hey there!
-      - Hello {{user.first_name}}
-      - Good day :)
-  - text: This is just a regular Hello World, I don't do anything ;)
-    typing: 2s
-  - text: Make sure to check out the 'index.js' file to see how I work
-    typing: true
-  - wait: 5s
-  - text: You can say goodbye now
+start:
+  - text:
+     - Salut !
+     - Bien le bonjour !
+     - Bonjour {{user.first_name}} !
+
+askcontrib:
+  - typing: 2s
+    text: Tu veux m'aider à décrire les arrêts de bus ?
+
+later:
+  - wait: 1s
+  - text: OK, je te laisse tranquille ;-)
+
+contrib:
+  - wait: 1s
+  - text: Cool, c'est parti !
     typing: 1s
 
-goodbye:
-  - text: You are leaving because of reason {{reason}}
-    typing: true
-  - Hope to see you back again soon! # if no other properties, you can just send a strings
+seebus:
+  - text: Il y a un arrêt {{bus_stop_name}} près de toi. Je te parle de celui de la ligne {{bus_line_ref}}, qui va vers {{bus_line_direction}}
+    typing: 1s
+  - wait: 1s
+  - text: Tu le vois ?
+
+checkname:
+  - wait: 1s
+  - text: Tu peux me confirmer qu'il s'appelle bien "{{bus_stop_name}}" ?
+
+cantseebus:
+  - wait: 1s
+  - text: C'est ballot !
+  - text: Peut-être qu'il n'existe plus, je note ;-)
+    typing: 2s
+
+busnameok:
+  - wait: 1s
+  - text: Super, je confirme l'info à la communauté OSM ! Merci :-)
+    typing: 2s
+
+confirmbusname:
+  - wait: 1s
+  - text: L'arrêt s'appelle donc "{{bus_stop_name}}", tu valides ?
+    typing: 1s
+
+whatbusname:
+  - wait: 2s
+  - text: Quel est son vrai nom ?
+
+seeya:
+  - wait: 1s
+  - text: À la prochaine :-)

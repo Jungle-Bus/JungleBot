@@ -1,39 +1,102 @@
-/*
-  CONGRATULATIONS on creating your first Botpress bot!
+/**
+ * This class handles basic interaction with the user.
+ */
 
-  This is the programmatic entry point of your bot.
-  Your bot's logic resides here.
-  
-  Here's the next steps for you:
-  1. Read this file to understand how this simple bot works
-  2. Read the `content.yml` file to understand how messages are sent
-  3. Install a connector module (Facebook Messenger and/or Slack)
-  4. Customize your bot!
-
-  Happy bot building!
-
-  The Botpress Team
-  ----
-  Getting Started (Youtube Video): https://www.youtube.com/watch?v=HTpUmDz9kRY
-  Documentation: https://botpress.io/docs
-  Our Slack Community: https://slack.botpress.io
-*/
+const ANSWERS = {
+	yes: /oui|ok|wesh|d'accord|yep|tout à fait|ouais/i,
+	no: /non|bof|la flemme|plus tard|nul|prout|pas du tout/i
+};
 
 module.exports = function(bp) {
-  // Listens for a first message (this is a Regex)
-  // GET_STARTED is the first message you get on Facebook Messenger
-  bp.hear(/GET_STARTED|hello|hi|test|hey|holla/i, (event, next) => {
-    event.reply('#welcome') // See the file `content.yml` to see the block
-  })
-
-  // You can also pass a matcher object to better filter events
-  bp.hear({
-    type: /message|text/i,
-    text: /exit|bye|goodbye|quit|done|leave|stop/i
-  }, (event, next) => {
-    event.reply('#goodbye', {
-      // You can pass data to the UMM bloc!
-      reason: 'unknown'
-    })
-  })
+	//Hello
+	bp.hear(/GET_STARTED|bonjour|salut|yo|wesh/i, (event, next) => {
+		if(bp.convo.find(event)) {
+			return;
+		}
+		
+		bp.convo.start(event, convo => {
+			convo.threads['default'].addMessage('#start');
+			
+			convo.threads['default'].addQuestion('#askcontrib', response => {
+				if(ANSWERS.yes.test(response.text)) {
+					convo.say('#contrib');
+					convo.switchTo('bus');
+				}
+				else if(ANSWERS.no.test(response.text)) {
+					convo.stop('aborted');
+				}
+				else {
+					convo.repeat();
+				}
+			});
+			
+			convo.createThread('bus');
+			convo.threads['bus'].addQuestion(
+				'#seebus',
+				{
+					bus_stop_name: 'République',
+					bus_line_ref: 'C4',
+					bus_line_direction: 'Champs Blancs'
+				},
+				response => {
+					if(ANSWERS.yes.test(response.text)) {
+						convo.switchTo('checkbusname');
+					}
+					else if(ANSWERS.no.test(response.text)) {
+						convo.addMessage('#cantseebus');
+						convo.next();
+					}
+					else {
+						convo.repeat();
+					}
+				}
+			);
+			
+			convo.createThread('checkbusname');
+			convo.threads['checkbusname'].addQuestion(
+				'#checkname',
+				{ bus_stop_name: 'République' },
+				response => {
+					if(ANSWERS.yes.test(response.text)) {
+						convo.say('#busnameok');
+						convo.next();
+					}
+					else if(ANSWERS.no.test(response.text)) {
+						convo.switchTo('setbusname');
+					}
+					else {
+						convo.repeat();
+					}
+				}
+			);
+			
+			convo.createThread('setbusname');
+			convo.threads['setbusname'].addQuestion('#whatbusname', response => {
+				convo.say(`L'arrêt s'appelle donc "${response.text}"`);
+				convo.switchTo('confirmbusname');
+			});
+			
+			convo.createThread('confirmbusname');
+			convo.threads['confirmbusname'].addQuestion(
+				"Tu valides ?",
+				response => {
+					if(ANSWERS.yes.test(response.text)) {
+						convo.say('#busnameok');
+						convo.next();
+					}
+					else {
+						convo.switchTo('setbusname');
+					}
+				}
+			);
+			
+			convo.on("done", () => {
+				convo.say('#seeya');
+			});
+			
+			convo.on("aborted", () => {
+				convo.say('#later');
+			});
+		});
+	});
 }

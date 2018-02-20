@@ -9,7 +9,7 @@ const ANSWERS = {
 
 module.exports = function(bp) {
 	//Hello
-	bp.hear(/GET_STARTED|bonjour|salut|yo|wesh/i, (event, next) => {
+	bp.hear(/GET_STARTED|bonjour|salut|yo|wesh|hello/i, (event, next) => {
 		if(bp.convo.find(event)) {
 			return;
 		}
@@ -43,7 +43,7 @@ module.exports = function(bp) {
 						convo.switchTo('checkbusname');
 					}
 					else if(ANSWERS.no.test(response.text)) {
-						convo.addMessage('#cantseebus');
+						convo.say('#cantseebus');
 						convo.next();
 					}
 					else {

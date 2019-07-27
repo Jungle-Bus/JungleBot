@@ -2,6 +2,8 @@
 
 Chatbot for contributing to OpenStreetMap public transport data (Messenger-only for the while).
 
+![Chatbot logo](https://github.com/Jungle-Bus/resources/raw/master/logo/Logo_Jungle_Bus-Bot.png)
+
 ## Purpose
 
 TODO
